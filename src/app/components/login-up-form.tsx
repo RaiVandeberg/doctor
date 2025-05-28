@@ -22,11 +22,7 @@ import { FormField } from "@/components/ui/form";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const registerSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(3, { message: "Nome deve conter pelo menos 3 caracteres" }),
+const loginschema = z.object({
   email: z.string().trim().email({ message: "Email inválido" }).min(6, {
     message: "Email deve conter pelo menos 6 caracteres",
   }),
@@ -35,17 +31,16 @@ const registerSchema = z.object({
   }),
 });
 
-const SignUpForm = () => {
-  const form = useForm<z.infer<typeof registerSchema>>({
-    resolver: zodResolver(registerSchema),
+const LoginForm = () => {
+  const form = useForm<z.infer<typeof loginschema>>({
+    resolver: zodResolver(loginschema),
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof registerSchema>) {
+  function onSubmit(values: z.infer<typeof loginschema>) {
     console.log(values);
   }
 
@@ -54,23 +49,10 @@ const SignUpForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <CardHeader>
-            <CardTitle>Criar Conta</CardTitle>
-            <CardDescription>Crie uma conta para continuar</CardDescription>
+            <CardTitle>Login</CardTitle>
+            <CardDescription>Faça login para continuar</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nome</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Digite seu nome" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <CardContent className="space-y-4">
             <FormField
               control={form.control}
               name="email"
@@ -99,8 +81,8 @@ const SignUpForm = () => {
             />
           </CardContent>
           <CardFooter>
-            <Button className="mt-2 w-full cursor-pointer" type="submit">
-              Criar Conta
+            <Button className="w-full cursor-pointer" type="submit">
+              Entrar
             </Button>
           </CardFooter>
         </form>
@@ -109,4 +91,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default LoginForm;
