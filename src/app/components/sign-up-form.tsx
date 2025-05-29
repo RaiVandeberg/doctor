@@ -62,7 +62,9 @@ const SignUpForm = () => {
         },
         onError: (ctx) => {
           if (ctx.error.code == "USER_ALREADY_EXISTS") {
-            toast.error("Email já cadastrado");
+            toast.error("Email já cadastrado", {
+              duration: 500,
+            });
           }
           toast.error("Erro ao criar conta");
         },

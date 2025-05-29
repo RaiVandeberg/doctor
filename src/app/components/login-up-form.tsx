@@ -54,7 +54,9 @@ const LoginForm = () => {
       {
         onSuccess: () => {
           router.push("/dashboard");
-          toast.success("Login realizado com sucesso");
+          toast.success("Login realizado com sucesso", {
+            duration: 2000,
+          });
         },
         onError: () => {
           toast.error("E-mail ou senha inválidos");
